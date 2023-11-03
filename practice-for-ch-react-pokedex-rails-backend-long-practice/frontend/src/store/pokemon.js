@@ -10,11 +10,6 @@ const load = list => ({
   list
 });
 
-const load_one = singlePokemon => ({
-  type: LOAD_ONE,
-  singlePokemon
-})
-
 const loadTypes = types => ({
   type: LOAD_TYPES,
   types
@@ -38,7 +33,7 @@ export const getOnePokemon = (id) => async dispatch =>{
 
   if(response.ok){
     const poke = await response.json()
-    dispatch(load_one(poke))
+    dispatch(addOnePokemon(poke))
   }
 }
 
@@ -74,9 +69,6 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         list: sortList(action.list)
       };
-
-    case LOAD_ONE:
-      return action.singlePokemon
     case LOAD_TYPES: 
       return {
         ...state,

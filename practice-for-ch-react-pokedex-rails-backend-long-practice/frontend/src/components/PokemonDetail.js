@@ -18,6 +18,7 @@ const PokemonDetail = () => {
     setEditItemId(null);
     dispatch(getOnePokemon(pokemonId))
   }, [pokemonId]);
+  
   const pokemon = useSelector(state => state.pokemon[pokemonId]);
 
   if (!pokemon || !pokemon.moves) {
