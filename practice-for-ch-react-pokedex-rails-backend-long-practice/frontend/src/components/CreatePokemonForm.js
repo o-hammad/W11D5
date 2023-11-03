@@ -51,7 +51,7 @@ const CreatePokemonForm = ({ hideForm }) => {
       move2,
       moves: [move1, move2]
     };
-    debugger
+    // debugger
     let createdPokemon;
     if (createdPokemon) {
       dispatch(createPokemon(payload))
