@@ -46,7 +46,7 @@ export const getPokemonTypes = () => async dispatch => {
 };
 
 export const createPokemon = (payLoad) => async dispatch =>{
-  debugger
+  // debugger
   const response = await fetch("/api/pokemon", {
     method: "POST",
     body: JSON.stringify(payLoad),
@@ -58,6 +58,22 @@ export const createPokemon = (payLoad) => async dispatch =>{
   if(response.ok){
     const new_pokemon = await response.json()
     dispatch(addOnePokemon(new_pokemon))
+  }
+}
+
+export const updatePokemon = (pokemonId, pokeData)=> async dispatch =>{
+  // debugger
+  const res = await fetch(`/api/pokemon/${pokemonId}`, {
+    method: "PATCH",
+    body: JSON.stringify(pokeData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  // debugger
+  if(res.ok){
+    const updatedPoke = await res.json()
+    dispatch(addOnePokemon(updatedPoke))
   }
 }
 
