@@ -1,6 +1,7 @@
 import { LOAD_ITEMS, REMOVE_ITEM, ADD_ITEM } from './items';
 
 const LOAD = 'pokemon/LOAD';
+const LOAD_ONE = 'pokemon/LOAD_ONE'
 const LOAD_TYPES = 'pokemon/LOAD_TYPES';
 const ADD_ONE = 'pokemon/ADD_ONE';
 
@@ -8,6 +9,11 @@ const load = list => ({
   type: LOAD,
   list
 });
+
+const load_one = singlePokemon => ({
+  type: LOAD_ONE,
+  singlePokemon
+})
 
 const loadTypes = types => ({
   type: LOAD_TYPES,
@@ -21,12 +27,20 @@ const addOnePokemon = pokemon => ({
 
 export const getPokemon = () => async dispatch => {
   const response = await fetch(`/api/pokemon`);
-
   if (response.ok) {
     const list = await response.json();
     dispatch(load(list));
   }
 };
+
+export const getOnePokemon = (id) => async dispatch =>{
+  const response = await fetch(`/api/pokemon/${id}`)
+
+  if(response.ok){
+    const poke = await response.json()
+    dispatch(load_one(poke))
+  }
+}
 
 export const getPokemonTypes = () => async dispatch => {
   const response = await fetch(`/api/pokemon/types`);
@@ -60,6 +74,9 @@ const pokemonReducer = (state = initialState, action) => {
         ...state,
         list: sortList(action.list)
       };
+
+    case LOAD_ONE:
+      return action.singlePokemon
     case LOAD_TYPES: 
       return {
         ...state,
