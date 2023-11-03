@@ -10,15 +10,15 @@ import ItemForm from './ItemForm';
 const PokemonDetail = () => {
   const dispatch = useDispatch()
   const { pokemonId } = useParams();
-  const pokemon = useSelector(state => state.pokemon[pokemonId]);
   const [showEditPokeForm, setShowEditPokeForm] = useState(false);
   const [editItemId, setEditItemId] = useState(null);
-
+  
   useEffect(() => {
     setShowEditPokeForm(false);
     setEditItemId(null);
     dispatch(getOnePokemon(pokemonId))
   }, [pokemonId]);
+  const pokemon = useSelector(state => state.pokemon[pokemonId]);
 
   if (!pokemon || !pokemon.moves) {
     return null;
