@@ -1,7 +1,6 @@
 import { LOAD_ITEMS, REMOVE_ITEM, ADD_ITEM } from './items';
 
 const LOAD = 'pokemon/LOAD';
-const LOAD_ONE = 'pokemon/LOAD_ONE'
 const LOAD_TYPES = 'pokemon/LOAD_TYPES';
 const ADD_ONE = 'pokemon/ADD_ONE';
 
@@ -47,12 +46,13 @@ export const getPokemonTypes = () => async dispatch => {
 };
 
 export const createPokemon = (payLoad) => async dispatch =>{
+  debugger
   const response = await fetch("/api/pokemon", {
     method: "POST",
     body: JSON.stringify(payLoad),
     headers: {
-      "Content-Type": "appplication/json",
-      "accept": "application/json"
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     }
   })
   if(response.ok){
